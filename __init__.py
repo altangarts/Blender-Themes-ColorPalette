@@ -179,6 +179,16 @@ def _mark_theme_dirty(self, context):
     self.status_color = STATUS_COLOR_PENDING
 
 
+def _on_base_color_update(self, context):
+    _mark_theme_dirty(self, context)
+    if self.border_color_linked:
+        self.active_editor_outline_color = value_shift(tuple(self.base_color), 0.15)
+
+
+def _on_border_color_update(self, context):
+    _mark_theme_dirty(self, context)
+
+
 def _prop_row(layout, data, prop_name, factor=0.4):
     split = layout.split(factor=factor, align=True)
     split.label(text=data.bl_rna.properties[prop_name].name)
@@ -190,7 +200,17 @@ class FCTM_Preferences(bpy.types.AddonPreferences):
 
     base_color: bpy.props.FloatVectorProperty(
         name="Background Color", subtype='COLOR_GAMMA', size=4, min=0.0, max=1.0,
-        default=(0.14, 0.14, 0.16, 1.0), update=_mark_theme_dirty)
+        default=(0.14, 0.14, 0.16, 1.0), update=_on_base_color_update)
+
+    border_color_linked: bpy.props.BoolProperty(
+        name="Link Border Color to Background",
+        description="When enabled, the Active Editor Outline color always "
+                    "follows the Background Color (+0.15 value shift). Any "
+                    "manual edit to the Active Editor Outline color only "
+                    "lasts until the Background Color is changed again - it "
+                    "gets overwritten at that point. Turn this off (chain "
+                    "icon) to fully disconnect the border color instead",
+        default=True)
 
     interaction_color: bpy.props.FloatVectorProperty(
         name="Selected / Interaction Color", subtype='COLOR_GAMMA', size=4, min=0.0, max=1.0,
@@ -198,9 +218,11 @@ class FCTM_Preferences(bpy.types.AddonPreferences):
 
     active_editor_outline_color: bpy.props.FloatVectorProperty(
         name="Active Editor Outline", subtype='COLOR_GAMMA', size=4, min=0.0, max=1.0,
-        default=(0.27, 0.27, 0.31, 1.0), update=_mark_theme_dirty,
+        default=(0.27, 0.27, 0.31, 1.0), update=_on_border_color_update,
         description="Outline color of the currently focused/active editor area "
-                    "(User Interface > Editor & Widgets > Active Editor Outline).")
+                    "(User Interface > Editor & Widgets > Active Editor Outline). "
+                    "While linked, this is overwritten with a +0.15 value shift "
+                    "of the Background Color every time it changes.")
 
     slider_item_color: bpy.props.FloatVectorProperty(
         name="Value Slider Color", subtype='COLOR_GAMMA', size=4, min=0.0, max=1.0,
@@ -292,7 +314,15 @@ class FCTM_Preferences(bpy.types.AddonPreferences):
         col_ui = box_ui.column(align=False)
         _prop_row(col_ui, self, "base_color")
         _prop_row(col_ui, self, "interaction_color")
-        _prop_row(col_ui, self, "active_editor_outline_color")
+
+        border_split = col_ui.split(factor=0.4, align=True)
+        border_split.label(text=self.bl_rna.properties["active_editor_outline_color"].name)
+        border_sub = border_split.row(align=True)
+        border_sub.prop(self, "active_editor_outline_color", text="")
+        border_sub.prop(
+            self, "border_color_linked", text="",
+            icon='LINKED' if self.border_color_linked else 'UNLINKED', toggle=True
+        )
 
         col_ui.separator()  # Visual spacing
 
@@ -505,6 +535,7 @@ def apply_region_colors(region, back_color, nav_back_color, text_color, text_hi_
 
 RESETTABLE_PROPS = (
     "base_color", "interaction_color", "active_editor_outline_color",
+    "border_color_linked",
     "slider_item_color", "item_color", "number_text_color", "text_field_text_color",
     "playhead_color", "alt_row_alpha", "viewport_bg_type", "viewport_bg_color",
     "viewport_bg_grad", "viewport_grid_color", "viewport_grid_major_color",
