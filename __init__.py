@@ -198,7 +198,7 @@ class FCTM_Preferences(bpy.types.AddonPreferences):
 
     active_editor_outline_color: bpy.props.FloatVectorProperty(
         name="Active Editor Outline", subtype='COLOR_GAMMA', size=4, min=0.0, max=1.0,
-        default=(0.14, 0.14, 0.16, 1.0), update=_mark_theme_dirty,
+        default=(0.27, 0.27, 0.31, 1.0), update=_mark_theme_dirty,
         description="Outline color of the currently focused/active editor area "
                     "(User Interface > Editor & Widgets > Active Editor Outline).")
 
