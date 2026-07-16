@@ -22,11 +22,11 @@ STRUCTURAL_VALUE_DELTAS = {
     "panel_body":                           {"delta":  0.03, "alpha": 1.00},
     "sub_back":                             {"delta":  0.03, "alpha": 1.00},
     "sub_header":                           {"delta": -0.01, "alpha": 1.00},
-    "panel_header":                         {"delta": -0.08, "alpha": 1.00},
-    "panel_outline":                        {"delta": -0.08, "alpha": 1.00},
+    "panel_header":                         {"delta": -0.04, "alpha": 1.00},
+    "panel_outline":                        {"delta": -0.04, "alpha": 1.00},
 
     # Headers
-    "editor_header":                        {"delta":  0.15, "alpha": 1.00},
+    "editor_header":                        {"delta":  0.13, "alpha": 1.00},
     "side_header":                          {"delta": -0.07, "alpha": 1.00},
     "viewport_header":                      {"delta":  0.00, "alpha": 0.40},
 
@@ -57,8 +57,8 @@ STRUCTURAL_VALUE_DELTAS = {
     "clip_editor.grid":                     {"delta":  0.40, "alpha": 0.30},
 
     # Editor Border Line
-    "user_interface.editor_border":         {"delta":  0.15, "alpha": 1.00},
-    "user_interface.editor_outline": 	    {"delta":  0.15, "alpha": 1.00},
+    "user_interface.editor_border":         {"delta":  0.13, "alpha": 1.00},
+    "user_interface.editor_outline": 	    {"delta":  0.13, "alpha": 1.00},
 
 }
 
@@ -182,10 +182,34 @@ def _mark_theme_dirty(self, context):
 def _on_base_color_update(self, context):
     _mark_theme_dirty(self, context)
     if self.border_color_linked:
-        self.active_editor_outline_color = value_shift(tuple(self.base_color), 0.15)
+        self.active_editor_outline_color = value_shift(tuple(self.base_color), 0.13)
+    if self.lower_gradient_linked:
+        self.viewport_bg_color = value_shift(tuple(self.base_color), -0.01)
+    if self.upper_gradient_linked:
+        self.viewport_bg_grad = value_shift(tuple(self.base_color), 0.06)
+    if self.grid_color_linked:
+        self.viewport_grid_color = value_shift(tuple(self.base_color), 0.10)
+    if self.grid_major_color_linked:
+        self.viewport_grid_major_color = value_shift(tuple(self.base_color), 0.15)
 
 
 def _on_border_color_update(self, context):
+    _mark_theme_dirty(self, context)
+
+
+def _on_lower_gradient_update(self, context):
+    _mark_theme_dirty(self, context)
+
+
+def _on_upper_gradient_update(self, context):
+    _mark_theme_dirty(self, context)
+
+
+def _on_grid_color_update(self, context):
+    _mark_theme_dirty(self, context)
+
+
+def _on_grid_major_color_update(self, context):
     _mark_theme_dirty(self, context)
 
 
@@ -193,6 +217,17 @@ def _prop_row(layout, data, prop_name, factor=0.4):
     split = layout.split(factor=factor, align=True)
     split.label(text=data.bl_rna.properties[prop_name].name)
     split.prop(data, prop_name, text="")
+
+
+def _linked_prop_row(layout, data, prop_name, link_prop_name, factor=0.4):
+    """Same as _prop_row but with a chain-icon toggle button next to the
+    color field, mirroring the Active Editor Outline link pattern."""
+    split = layout.split(factor=factor, align=True)
+    split.label(text=data.bl_rna.properties[prop_name].name)
+    sub = split.row(align=True)
+    sub.prop(data, prop_name, text="")
+    linked = getattr(data, link_prop_name)
+    sub.prop(data, link_prop_name, text="", icon='LINKED' if linked else 'UNLINKED', toggle=True)
 
 
 class FCTM_Preferences(bpy.types.AddonPreferences):
@@ -218,7 +253,7 @@ class FCTM_Preferences(bpy.types.AddonPreferences):
 
     active_editor_outline_color: bpy.props.FloatVectorProperty(
         name="Active Editor Outline", subtype='COLOR_GAMMA', size=4, min=0.0, max=1.0,
-        default=(0.27, 0.27, 0.31, 1.0), update=_on_border_color_update,
+        default=(0.24, 0.24, 0.28, 1.0), update=_on_border_color_update,
         description="Outline color of the currently focused/active editor area "
                     "(User Interface > Editor & Widgets > Active Editor Outline). "
                     "While linked, this is overwritten with a +0.15 value shift "
@@ -269,28 +304,76 @@ class FCTM_Preferences(bpy.types.AddonPreferences):
         default='LINEAR', update=_mark_theme_dirty
     )
 
+    lower_gradient_linked: bpy.props.BoolProperty(
+        name="Link Lower Gradient to Background",
+        description="When enabled, the Lower Gradient Color always follows "
+                    "the Background Color (-0.05 value shift). Any manual "
+                    "edit to the Lower Gradient Color only lasts until the "
+                    "Background Color is changed again - it gets overwritten "
+                    "at that point. Turn this off (chain icon) to fully "
+                    "disconnect the gradient color instead",
+        default=True)
+
     viewport_bg_color: bpy.props.FloatVectorProperty(
         name="Lower Gradient Color", subtype='COLOR_GAMMA', size=4, min=0.0, max=1.0,
-        default=(0.12, 0.12, 0.14, 1.0), update=_mark_theme_dirty,
+        default=(0.12, 0.12, 0.14, 1.0), update=_on_lower_gradient_update,
         description="Bottom color of the viewport gradient. Also used as the "
                     "flat background color when Background Type is set to "
-                    "Single Color.")
+                    "Single Color. While linked, this is overwritten with a "
+                    "-0.05 value shift of the Background Color every time it "
+                    "changes.")
+
+    upper_gradient_linked: bpy.props.BoolProperty(
+        name="Link Upper Gradient to Background",
+        description="When enabled, the Upper Gradient Color always follows "
+                    "the Background Color (-0.15 value shift). Any manual "
+                    "edit to the Upper Gradient Color only lasts until the "
+                    "Background Color is changed again - it gets overwritten "
+                    "at that point. Turn this off (chain icon) to fully "
+                    "disconnect the gradient color instead",
+        default=True)
 
     viewport_bg_grad: bpy.props.FloatVectorProperty(
         name="Upper Gradient Color", subtype='COLOR_GAMMA', size=4, min=0.0, max=1.0,
-        default=(0.20, 0.20, 0.22, 1.0), update=_mark_theme_dirty,
-        description="Top color of the viewport gradient (Linear or Radial).")
+        default=(0.20, 0.20, 0.22, 1.0), update=_on_upper_gradient_update,
+        description="Top color of the viewport gradient (Linear or Radial). "
+                    "While linked, this is overwritten with a -0.15 value "
+                    "shift of the Background Color every time it changes.")
+
+    grid_color_linked: bpy.props.BoolProperty(
+        name="Link Grid Color to Background",
+        description="When enabled, the Grid Color always follows the "
+                    "Background Color (-0.05 value shift). Any manual edit "
+                    "to the Grid Color only lasts until the Background Color "
+                    "is changed again - it gets overwritten at that point. "
+                    "Turn this off (chain icon) to fully disconnect the grid "
+                    "color instead",
+        default=True)
 
     viewport_grid_color: bpy.props.FloatVectorProperty(
         name="Grid Color", subtype='COLOR_GAMMA', size=4, min=0.0, max=1.0,
-        default=(0.15, 0.15, 0.15, 1.0), update=_mark_theme_dirty)
+        default=(0.15, 0.15, 0.15, 1.0), update=_on_grid_color_update,
+        description="While linked, this is overwritten with a -0.05 value "
+                    "shift of the Background Color every time it changes.")
+
+    grid_major_color_linked: bpy.props.BoolProperty(
+        name="Link Major Grid Color to Background",
+        description="When enabled, the Major Grid Color always follows the "
+                    "Background Color (-0.15 value shift). Any manual edit "
+                    "to the Major Grid Color only lasts until the Background "
+                    "Color is changed again - it gets overwritten at that "
+                    "point. Turn this off (chain icon) to fully disconnect "
+                    "the grid color instead",
+        default=True)
 
     viewport_grid_major_color: bpy.props.FloatVectorProperty(
         name="Major Grid Color", subtype='COLOR_GAMMA', size=4, min=0.0, max=1.0,
-        default=(0.20, 0.20, 0.20, 1.0), update=_mark_theme_dirty,
+        default=(0.20, 0.20, 0.20, 1.0), update=_on_grid_major_color_update,
         description="Color of the major grid lines in the 3D Viewport "
                     "(theme.view_3d.grid_major) - separate from the regular "
-                    "grid color above.")
+                    "grid color above. While linked, this is overwritten "
+                    "with a -0.15 value shift of the Background Color every "
+                    "time it changes.")
 
     status_color: bpy.props.FloatVectorProperty(
         name="Status", subtype='COLOR_GAMMA', size=3, min=0.0, max=1.0,
@@ -345,13 +428,13 @@ class FCTM_Preferences(bpy.types.AddonPreferences):
         type_split.label(text="Background Type")
         type_split.prop(self, "viewport_bg_type", text="")
 
-        _prop_row(col_vp, self, "viewport_bg_color")
+        _linked_prop_row(col_vp, self, "viewport_bg_color", "lower_gradient_linked")
 
         if self.viewport_bg_type != 'SINGLE_COLOR':
-            _prop_row(col_vp, self, "viewport_bg_grad")
+            _linked_prop_row(col_vp, self, "viewport_bg_grad", "upper_gradient_linked")
 
-        _prop_row(col_vp, self, "viewport_grid_color")
-        _prop_row(col_vp, self, "viewport_grid_major_color")
+        _linked_prop_row(col_vp, self, "viewport_grid_color", "grid_color_linked")
+        _linked_prop_row(col_vp, self, "viewport_grid_major_color", "grid_major_color_linked")
 
         layout.separator()
 
@@ -535,7 +618,8 @@ def apply_region_colors(region, back_color, nav_back_color, text_color, text_hi_
 
 RESETTABLE_PROPS = (
     "base_color", "interaction_color", "active_editor_outline_color",
-    "border_color_linked",
+    "border_color_linked", "lower_gradient_linked", "upper_gradient_linked",
+    "grid_color_linked", "grid_major_color_linked",
     "slider_item_color", "item_color", "number_text_color", "text_field_text_color",
     "playhead_color", "alt_row_alpha", "viewport_bg_type", "viewport_bg_color",
     "viewport_bg_grad", "viewport_grid_color", "viewport_grid_major_color",
