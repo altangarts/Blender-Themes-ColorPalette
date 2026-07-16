@@ -24,6 +24,7 @@ STRUCTURAL_VALUE_DELTAS = {
     "sub_header":                           {"delta": -0.01, "alpha": 1.00},
     "panel_header":                         {"delta": -0.04, "alpha": 1.00},
     "panel_outline":                        {"delta": -0.04, "alpha": 1.00},
+    "widget_emboss":                        {"delta":  0.00, "alpha": 0.00},
 
     # Headers
     "editor_header":                        {"delta":  0.13, "alpha": 1.00},
@@ -249,7 +250,7 @@ class FCTM_Preferences(bpy.types.AddonPreferences):
 
     interaction_color: bpy.props.FloatVectorProperty(
         name="Selected / Interaction Color", subtype='COLOR_GAMMA', size=4, min=0.0, max=1.0,
-        default=(0.41, 0.09, 0.79, 1.0), update=_mark_theme_dirty)
+        default=(0.33, 0.00, 0.50, 1.0), update=_mark_theme_dirty)
 
     active_editor_outline_color: bpy.props.FloatVectorProperty(
         name="Active Editor Outline", subtype='COLOR_GAMMA', size=4, min=0.0, max=1.0,
@@ -691,6 +692,7 @@ class FCTM_OT_apply_theme(bpy.types.Operator):
                 set_color(wcol_num, "text_sel", palette["number_text"])
 
             set_color(ui, "panel_outline", palette["panel_outline"])
+            set_color(ui, "widget_emboss", palette["widget_emboss"])
             set_color(ui, "panel_active", palette["interaction"])
 
             wcol_subpanel = getattr(ui, "wcol_subpanel", None)
