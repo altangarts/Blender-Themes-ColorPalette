@@ -1,0 +1,17 @@
+schema_version = "1.0.0"
+
+id = "colorpalette_theme_editor"
+version = "1.0.0"
+name = "ColorPalette Theme Editor"
+tagline = "Compact Theme Editor"
+maintainer = "@altangarts"
+type = "add-on"
+
+blender_version_min = "5.0.0"
+
+tags = ["Theme Editor"]
+
+# License conforming to https://spdx.org/licenses/ (use "SPDX: prefix)
+license = [
+  "SPDX:GPL-2.0-or-later",
+]
