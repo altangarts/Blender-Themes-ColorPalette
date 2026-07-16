@@ -12,7 +12,7 @@ Prerequisites :  Blender 5.0.0 ≥
   
   1. Primary;
 
-     -Edit - Preferences - Add-ons - İnstall from disk - (Choose file)
+     -Edit - Preferences - Add-ons - İnstall from disk - (Choose Blender-Themes-ColorPalette-main.zip)
 
 
  Examples
