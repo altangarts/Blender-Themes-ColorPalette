@@ -1,6 +1,6 @@
 # ColorPalette Theme Editor for Blender3D
 
-You can color all windows and panels by choosing a main background color. It provides easy access to several frequently used color options. It creates a panel-focused theme.
+With ColorPalette Theme Editor, you can color all windows and panels by selecting a single main background color. It also provides easy access to various frequently used color options. And it creates a panel-focused theme.
 
 
 
