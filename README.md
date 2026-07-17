@@ -2,6 +2,8 @@
 
 With ColorPalette Theme Editor, you can color all windows and panels by selecting a single main background color. It also provides easy access to various frequently used color options. And it creates a panel-focused theme.
 
+You can disconnect the links by clicking on them in the color options.
+
 
 
 -------------------------------------------------------
