@@ -6,6 +6,7 @@ name = "ColorPalette Theme Editor"
 tagline = "Compact Theme Editor"
 maintainer = "@altangarts"
 type = "add-on"
+website = "https://github.com/altangarts"
 
 blender_version_min = "5.0.0"
 

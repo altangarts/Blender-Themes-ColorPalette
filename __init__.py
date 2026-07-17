@@ -19,8 +19,8 @@ import os
 STRUCTURAL_VALUE_DELTAS = {
     # General Body and Panels
     "background":                           {"delta":  0.00, "alpha": 1.00},
-    "panel_body":                           {"delta":  0.03, "alpha": 1.00},
-    "sub_back":                             {"delta":  0.03, "alpha": 1.00},
+    "panel_body":                           {"delta":  0.04, "alpha": 1.00},
+    "sub_back":                             {"delta":  0.04, "alpha": 1.00},
     "sub_header":                           {"delta": -0.01, "alpha": 1.00},
     "panel_header":                         {"delta": -0.04, "alpha": 1.00},
     "panel_outline":                        {"delta": -0.04, "alpha": 1.00},
@@ -39,13 +39,14 @@ STRUCTURAL_VALUE_DELTAS = {
     "tab_active":                           {"delta":  0.15, "alpha": 1.00},
 
     # Direct Path Regions
-    "regions.asset_shelf.back":             {"delta": -0.02, "alpha": 1.00},
+    "regions.asset_shelf.back":             {"delta": -0.05, "alpha": 1.00},
+    "node_editor.node_backdrop":            {"delta":  0.10, "alpha": 1.00},
     "regions.asset_shelf.header_back":      {"delta": -0.05, "alpha": 1.00},
     "regions.channels.back":                {"delta": -0.03, "alpha": 1.00},
     "regions.scrubbing.back":               {"delta": -0.02, "alpha": 1.00},
-    "regions.sidebars.back":                {"delta": -0.015, "alpha": 0.00},
-    "regions.sidebars.tab_back":            {"delta": -0.015, "alpha": 0.00},
-    "text_editor.line_numbers_background":  {"delta": -0.15, "alpha": 1.00},
+    "regions.sidebars.back":                {"delta": -0.03, "alpha": 0.00},
+    "regions.sidebars.tab_back":            {"delta": -0.03, "alpha": 0.00},
+    "text_editor.line_numbers_background":  {"delta": -0.04, "alpha": 1.00},
 
     # Shared Grid Definitions Across Editors
     "graph_editor.grid":                    {"delta":  0.40, "alpha": 0.30},
@@ -61,32 +62,33 @@ STRUCTURAL_VALUE_DELTAS = {
     "user_interface.editor_border":         {"delta":  0.13, "alpha": 1.00},
     "user_interface.editor_outline": 	    {"delta":  0.13, "alpha": 1.00},
 
+    "world_background":                     {"delta": -0.13, "alpha": 1.00},
 }
 
 WCOL_VALUE_DELTAS = {
-    "wcol_regular":     {"inner_delta": -0.10, "outline_delta": -0.00, "inner_alpha": 1.00},
-    "wcol_tool":        {"inner_delta":  0.03, "outline_delta": -0.00, "inner_alpha": 1.00},
-    "wcol_text":        {"inner_delta":  0.08, "outline_delta": -0.00, "inner_alpha": 1.00},
-    "wcol_radio":       {"inner_delta":  0.03, "outline_delta": -0.03, "inner_alpha": 1.00},
-    "wcol_toggle":      {"inner_delta": -0.10, "outline_delta": -0.00, "inner_alpha": 1.00},
-    "wcol_num":         {"inner_delta":  0.08, "outline_delta": -0.00, "inner_alpha": 1.00},
-    "wcol_numslider":   {"inner_delta":  0.08, "outline_delta": -0.00, "inner_alpha": 1.00},
-    "wcol_box":         {"inner_delta": -0.05, "outline_delta": -0.05, "inner_alpha": 1.00},
-    "wcol_state":       {"inner_delta": -0.10, "outline_delta": -0.05, "inner_alpha": 1.00},
-    "wcol_tab":         {"inner_delta": -0.015, "outline_delta": -0.015, "inner_alpha": 1.00},
-    "wcol_toolbar_item":{"inner_delta": -0.00, "outline_delta":  0.02, "inner_alpha": 0.40},
-    "wcol_scroll":      {"inner_delta": -0.05, "outline_delta": -0.05, "inner_alpha": 1.00},
-    "wcol_progress":    {"inner_delta": -0.10, "outline_delta": -0.05, "inner_alpha": 1.00},
-    "wcol_list_item":   {"inner_delta": -0.05, "outline_delta": -0.05, "inner_alpha": 1.00},
+    "wcol_regular":     {"inner_delta": -0.02, "outline_delta": -0.00, "inner_alpha": 1.00, "roundness": 0.40},
+    "wcol_tool":        {"inner_delta":  0.03, "outline_delta": -0.00, "inner_alpha": 1.00, "roundness": 0.40},
+    "wcol_text":        {"inner_delta":  0.08, "outline_delta": -0.00, "inner_alpha": 1.00, "roundness": 0.40},
+    "wcol_radio":       {"inner_delta":  0.03, "outline_delta": -0.03, "inner_alpha": 1.00, "roundness": 0.40},
+    "wcol_toggle":      {"inner_delta": -0.10, "outline_delta": -0.00, "inner_alpha": 1.00, "roundness": 0.40},
+    "wcol_num":         {"inner_delta":  0.08, "outline_delta": -0.00, "inner_alpha": 1.00, "roundness": 0.40},
+    "wcol_numslider":   {"inner_delta":  0.08, "outline_delta": -0.00, "inner_alpha": 1.00, "roundness": 0.50},
+    "wcol_box":         {"inner_delta": -0.05, "outline_delta": -0.05, "inner_alpha": 1.00, "roundness": 0.80},
+    "wcol_state":       {"inner_delta": -0.10, "outline_delta": -0.05, "inner_alpha": 1.00, "roundness": None},
+    "wcol_tab":         {"inner_delta": -0.03, "outline_delta": -0.03, "inner_alpha": 1.00, "roundness": 0.40},
+    "wcol_toolbar_item":{"inner_delta": -0.03, "outline_delta": -0.03, "inner_alpha": 1.00, "roundness": 0.40},
+    "wcol_scroll":      {"inner_delta": -0.05, "outline_delta": -0.05, "inner_alpha": 1.00, "roundness": 1.00},
+    "wcol_progress":    {"inner_delta": -0.10, "outline_delta": -0.05, "inner_alpha": 1.00, "roundness": 0.40},
+    "wcol_list_item":   {"inner_delta": -0.05, "outline_delta": -0.05, "inner_alpha": 1.00, "roundness": 0.40},
 
     # Contrast for option-type widgets
-    "wcol_option":      {"inner_delta": -0.18, "outline_delta": -0.05, "inner_alpha": 1.00},
-    "wcol_menu":        {"inner_delta":  0.03, "outline_delta": -0.00, "inner_alpha": 1.00},
-    "wcol_pulldown":    {"inner_delta": -0.08, "outline_delta": -0.05, "inner_alpha": 1.00},
-    "wcol_menu_back":   {"inner_delta": -0.04, "outline_delta": -0.05, "inner_alpha": 1.00},
-    "wcol_menu_item":   {"inner_delta": -0.03, "outline_delta": -0.02, "inner_alpha": 1.00},
-    "wcol_tooltip":     {"inner_delta": -0.00, "outline_delta": -0.05, "inner_alpha": 1.00},
-    "wcol_pie_menu":    {"inner_delta": -0.12, "outline_delta": -0.05, "inner_alpha": 1.00},
+    "wcol_option":      {"inner_delta":  0.13, "outline_delta":  0.10, "inner_alpha": 1.00, "roundness": 1.00},
+    "wcol_menu":        {"inner_delta":  0.03, "outline_delta": -0.00, "inner_alpha": 1.00, "roundness": 0.40},
+    "wcol_pulldown":    {"inner_delta": -0.08, "outline_delta": -0.05, "inner_alpha": 1.00, "roundness": 0.40},
+    "wcol_menu_back":   {"inner_delta": -0.04, "outline_delta": -0.05, "inner_alpha": 1.00, "roundness": 0.40},
+    "wcol_menu_item":   {"inner_delta": -0.03, "outline_delta": -0.02, "inner_alpha": 1.00, "roundness": 0.40},
+    "wcol_tooltip":     {"inner_delta": -0.00, "outline_delta": -0.05, "inner_alpha": 1.00, "roundness": 0.40},
+    "wcol_pie_menu":    {"inner_delta": -0.12, "outline_delta": -0.05, "inner_alpha": 1.00, "roundness": 0.40},
 }
 
 SHADED_WIDGETS = (
@@ -125,7 +127,8 @@ def contrast_pair(rgba):
 
 
 def derive_palette(base_rgba, interaction_rgba, slider_item_rgba, item_rgba, number_text_rgba,
-                    text_field_text_rgba, playhead_rgba, active_editor_outline_rgba, alt_row_alpha):
+                    text_field_text_rgba, playhead_rgba, active_editor_outline_rgba, alt_row_alpha,
+                    pulldown_text_rgba):
     r, g, b = base_rgba[0], base_rgba[1], base_rgba[2]
     luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b
 
@@ -143,6 +146,7 @@ def derive_palette(base_rgba, interaction_rgba, slider_item_rgba, item_rgba, num
         "item": tuple(item_rgba),
         "number_text": tuple(number_text_rgba),
         "text_field_text": tuple(text_field_text_rgba),
+        "pulldown_text": tuple(pulldown_text_rgba),
         "playhead": tuple(playhead_rgba),
         "user_interface.editor_outline_active": tuple(active_editor_outline_rgba),
         "alt_row": (alt_rgb[0], alt_rgb[1], alt_rgb[2], alt_row_alpha),
@@ -167,6 +171,7 @@ def derive_palette(base_rgba, interaction_rgba, slider_item_rgba, item_rgba, num
             "inner": value_shift(base_rgba, cfg["inner_delta"], alpha=cfg.get("inner_alpha", 1.0)),
             "outline": value_shift(base_rgba, cfg["outline_delta"]),
             "outline_sel": value_shift(interaction_rgba, cfg["outline_delta"]),
+            "roundness": cfg.get("roundness")
         }
 
     return palette
@@ -178,6 +183,7 @@ def derive_palette(base_rgba, interaction_rgba, slider_item_rgba, item_rgba, num
 
 def _mark_theme_dirty(self, context):
     self.status_color = STATUS_COLOR_PENDING
+    self.is_pending = True
 
 
 def _on_base_color_update(self, context):
@@ -262,7 +268,7 @@ class FCTM_Preferences(bpy.types.AddonPreferences):
 
     slider_item_color: bpy.props.FloatVectorProperty(
         name="Value Slider Color", subtype='COLOR_GAMMA', size=4, min=0.0, max=1.0,
-        default=(0.70, 0.35, 0.00, 1.0), update=_mark_theme_dirty)
+        default=(0.50, 0.25, 0.00, 1.0), update=_mark_theme_dirty)
 
     item_color: bpy.props.FloatVectorProperty(
         name="Text / Number Field Color", subtype='COLOR_GAMMA', size=4, min=0.0, max=1.0,
@@ -284,6 +290,14 @@ class FCTM_Preferences(bpy.types.AddonPreferences):
         description="Color of the actual text typed inside wcol_text fields "
                     "(line edits) - separate from the generic auto-contrast "
                     "text color and from the item/cursor color above.")
+
+    pulldown_text_color: bpy.props.FloatVectorProperty(
+        name="Pulldown Text Color", subtype='COLOR_GAMMA', size=4, min=0.0, max=1.0,
+        default=(0.92, 0.68, 0.28, 1.0), update=_mark_theme_dirty,
+        description="Color of the text shown on wcol_pulldown widgets - the "
+                    "dropdown/pulldown selectors (e.g. Editor Type, header "
+                    "mode dropdowns) - separate from the generic auto-contrast "
+                    "text color used elsewhere.")
 
     playhead_color: bpy.props.FloatVectorProperty(
         name="Playhead (Timeline)", subtype='COLOR_GAMMA', size=4, min=0.0, max=1.0,
@@ -353,7 +367,7 @@ class FCTM_Preferences(bpy.types.AddonPreferences):
 
     viewport_grid_color: bpy.props.FloatVectorProperty(
         name="Grid Color", subtype='COLOR_GAMMA', size=4, min=0.0, max=1.0,
-        default=(0.15, 0.15, 0.15, 1.0), update=_on_grid_color_update,
+        default=(0.15, 0.15, 0.17, 1.0), update=_on_grid_color_update,
         description="While linked, this is overwritten with a -0.05 value "
                     "shift of the Background Color every time it changes.")
 
@@ -369,18 +383,36 @@ class FCTM_Preferences(bpy.types.AddonPreferences):
 
     viewport_grid_major_color: bpy.props.FloatVectorProperty(
         name="Major Grid Color", subtype='COLOR_GAMMA', size=4, min=0.0, max=1.0,
-        default=(0.20, 0.20, 0.20, 1.0), update=_on_grid_major_color_update,
+        default=(0.20, 0.20, 0.22, 1.0), update=_on_grid_major_color_update,
         description="Color of the major grid lines in the 3D Viewport "
                     "(theme.view_3d.grid_major) - separate from the regular "
                     "grid color above. While linked, this is overwritten "
                     "with a -0.15 value shift of the Background Color every "
                     "time it changes.")
 
+    viewport_text_highlight_color: bpy.props.FloatVectorProperty(
+        name="Viewport Text Highlight", subtype='COLOR_GAMMA', size=4, min=0.0, max=1.0,
+        default=(0.54, 0.80, 0.28, 1.0), update=_mark_theme_dirty,
+        description="Color of highlighted/selected text drawn directly in "
+                    "the 3D Viewport (theme.view_3d.space.text_hi) - e.g. the "
+                    "active object's name and highlighted overlay stats. "
+                    "Separate from the generic auto-contrast text color used "
+                    "in every other editor.")
+
     status_color: bpy.props.FloatVectorProperty(
         name="Status", subtype='COLOR_GAMMA', size=3, min=0.0, max=1.0,
         default=STATUS_COLOR_PENDING,
         description="Plain RGB indicator next to the Apply Theme button: "
                     "red = not applied / out of date, green = applied.")
+
+    is_pending: bpy.props.BoolProperty(
+        name="Theme Out Of Date", default=True,
+        description="Internal flag - not shown in the UI. Tracks whether the "
+                    "theme needs re-applying. Kept separate from status_color "
+                    "because color properties are stored as 32-bit floats in "
+                    "Blender, so comparing a read-back color against a Python "
+                    "tuple constant is unreliable (round-trip precision loss "
+                    "means the values are almost never bit-for-bit equal).")
 
     has_saved_initial_preset: bpy.props.BoolProperty(
         name="Initial 'ColorPaletteTheme' Preset Saved", default=False,
@@ -415,6 +447,7 @@ class FCTM_Preferences(bpy.types.AddonPreferences):
         _prop_row(col_ui, self, "item_color")
         _prop_row(col_ui, self, "number_text_color")
         _prop_row(col_ui, self, "text_field_text_color")
+        _prop_row(col_ui, self, "pulldown_text_color")
         _prop_row(col_ui, self, "playhead_color")
 
         col_ui.separator()  # Visual spacing
@@ -436,6 +469,7 @@ class FCTM_Preferences(bpy.types.AddonPreferences):
 
         _linked_prop_row(col_vp, self, "viewport_grid_color", "grid_color_linked")
         _linked_prop_row(col_vp, self, "viewport_grid_major_color", "grid_major_color_linked")
+        _prop_row(col_vp, self, "viewport_text_highlight_color")
 
         layout.separator()
 
@@ -446,13 +480,16 @@ class FCTM_Preferences(bpy.types.AddonPreferences):
 
         layout.separator()
 
-        is_pending = tuple(self.status_color) == STATUS_COLOR_PENDING
+        is_pending = self.is_pending
 
         row = layout.row()
         row.alignment = 'CENTER'
-        sub = row.row(align=True)
+
+        border_box = row.box()
+        border_box.alert = is_pending
+
+        sub = border_box.row(align=True)
         sub.scale_y = 1.6
-        sub.alert = is_pending
 
         indicator_left = sub.row(align=True)
         indicator_left.scale_x = 0.3
@@ -576,7 +613,7 @@ def remove_text_shadows(context):
                 setattr(font_style, prop, value)
 
 
-def apply_widget_colors(wcol, wcol_colors, palette, is_shaded=False):
+def apply_widget_colors(wcol, wcol_colors, palette, is_shaded=False, roundness=None):
     set_color(wcol, "inner", wcol_colors["inner"])
     set_color(wcol, "inner_sel", palette["interaction"])
     set_color(wcol, "outline", wcol_colors["outline"])
@@ -585,6 +622,9 @@ def apply_widget_colors(wcol, wcol_colors, palette, is_shaded=False):
     set_color(wcol, "item_sel", palette["interaction"])
     set_color(wcol, "text", palette["text"])
     set_color(wcol, "text_sel", TEXT_WHITE_SELECTED)
+
+    if roundness is not None and hasattr(wcol, "roundness"):
+        wcol.roundness = roundness
 
     if is_shaded:
         for attr in ("show_shaded", "use_shaded", "shaded", "shading"):
@@ -602,6 +642,34 @@ def apply_widget_colors(wcol, wcol_colors, palette, is_shaded=False):
             wcol.shadetop = 0
         if hasattr(wcol, "shadedown"):
             wcol.shadedown = 0
+
+
+def apply_world_background_color(context, color_rgba):
+    """Sets World > Surface > Background to color_rgba. Hidden from the UI -
+    driven entirely by the world_background delta in STRUCTURAL_VALUE_DELTAS."""
+    scene = getattr(context, "scene", None)
+    if scene is None:
+        return
+    world = getattr(scene, "world", None)
+    if world is None:
+        return
+
+    # Legacy/simple world color (fallback representation, harmless to set
+    # even on node-based worlds).
+    set_color(world, "color", color_rgba)
+
+    node_tree = getattr(world, "node_tree", None)
+    if node_tree is None:
+        return
+    bg_node = node_tree.nodes.get("Background")
+    if bg_node is None:
+        return
+    try:
+        bg_node.inputs[0].default_value = (
+            color_rgba[0], color_rgba[1], color_rgba[2], 1.0
+        )
+    except Exception:
+        pass
 
 
 def apply_region_colors(region, back_color, nav_back_color, text_color, text_hi_color):
@@ -622,8 +690,10 @@ RESETTABLE_PROPS = (
     "border_color_linked", "lower_gradient_linked", "upper_gradient_linked",
     "grid_color_linked", "grid_major_color_linked",
     "slider_item_color", "item_color", "number_text_color", "text_field_text_color",
+    "pulldown_text_color",
     "playhead_color", "alt_row_alpha", "viewport_bg_type", "viewport_bg_color",
     "viewport_bg_grad", "viewport_grid_color", "viewport_grid_major_color",
+    "viewport_text_highlight_color",
 )
 
 
@@ -641,6 +711,7 @@ class FCTM_OT_reset_defaults(bpy.types.Operator):
             prefs.property_unset(prop_name)
 
         prefs.status_color = STATUS_COLOR_PENDING
+        prefs.is_pending = True
         self.report({'INFO'}, "Settings reset to defaults - press Apply Theme to use them")
         return {'FINISHED'}
 
@@ -653,6 +724,9 @@ class FCTM_OT_apply_theme(bpy.types.Operator):
     def execute(self, context):
         prefs = context.preferences.addons[__name__].preferences
         theme = context.preferences.themes[0]
+        
+        theme.user_interface.panel_roundness = 0.8
+
         palette = derive_palette(
             tuple(prefs.base_color),
             tuple(prefs.interaction_color),
@@ -662,7 +736,8 @@ class FCTM_OT_apply_theme(bpy.types.Operator):
             tuple(prefs.text_field_text_color),
             tuple(prefs.playhead_color),
             tuple(prefs.active_editor_outline_color),
-            prefs.alt_row_alpha
+            prefs.alt_row_alpha,
+            tuple(prefs.pulldown_text_color)
         )
 
         remove_text_shadows(context)
@@ -674,7 +749,10 @@ class FCTM_OT_apply_theme(bpy.types.Operator):
                 wcol = getattr(ui, wname, None)
                 if wcol is not None:
                     is_shaded = wname in SHADED_WIDGETS
-                    apply_widget_colors(wcol, wcol_colors, palette, is_shaded=is_shaded)
+                    apply_widget_colors(
+                        wcol, wcol_colors, palette,
+                        is_shaded=is_shaded, roundness=wcol_colors.get("roundness")
+                    )
 
             for wname in ("wcol_numslider", "wcol_progress"):
                 wcol = getattr(ui, wname, None)
@@ -682,14 +760,14 @@ class FCTM_OT_apply_theme(bpy.types.Operator):
                     set_color(wcol, "item", palette["slider_item"])
                     set_color(wcol, "item_sel", palette["slider_item"])
                     set_color(wcol, "text", palette["number_text"])
-                    set_color(wcol, "text_sel", palette["number_text"])
+                    set_color(wcol, "text_sel", TEXT_WHITE_SELECTED)
 
             wcol_num = getattr(ui, "wcol_num", None)
             if wcol_num is not None:
                 set_color(wcol_num, "item", palette["item"])
                 set_color(wcol_num, "item_sel", palette["item"])
                 set_color(wcol_num, "text", palette["number_text"])
-                set_color(wcol_num, "text_sel", palette["number_text"])
+                set_color(wcol_num, "text_sel", TEXT_WHITE_SELECTED)
 
             set_color(ui, "panel_outline", palette["panel_outline"])
             set_color(ui, "widget_emboss", palette["widget_emboss"])
@@ -714,9 +792,14 @@ class FCTM_OT_apply_theme(bpy.types.Operator):
             wcol_text = getattr(ui, "wcol_text", None)
             if wcol_text is not None:
                 set_color(wcol_text, "text", palette["text_field_text"])
-                set_color(wcol_text, "text_sel", palette["text_field_text"])
+                set_color(wcol_text, "text_sel", TEXT_WHITE_SELECTED)
                 set_color(wcol_text, "item", palette["item"])
-                set_color(wcol_text, "item_sel", palette["item"])
+                set_color(wcol_text, "item_sel", TEXT_WHITE_SELECTED)
+
+            wcol_pulldown = getattr(ui, "wcol_pulldown", None)
+            if wcol_pulldown is not None:
+                set_color(wcol_pulldown, "text", palette["pulldown_text"])
+                set_color(wcol_pulldown, "text_sel", TEXT_WHITE_SELECTED)
 
             for attr in ("region_back", "navigation_back", "tab_back", "tab_inactive", "tab_active"):
                 if hasattr(ui, attr):
@@ -777,6 +860,7 @@ class FCTM_OT_apply_theme(bpy.types.Operator):
                            palette["user_interface.editor_outline_active"])
 
         set_color_by_path(theme, "regions.asset_shelf.back", palette["regions.asset_shelf.back"])
+        set_color_by_path(theme, "node_editor.node_backdrop", palette["node_editor.node_backdrop"])
         set_color_by_path(theme, "regions.asset_shelf.header_back", palette["regions.asset_shelf.header_back"])
         set_color_by_path(theme, "regions.channels.back", palette["regions.channels.back"])
         set_color_by_path(theme, "regions.scrubbing.back", palette["regions.scrubbing.back"])
@@ -798,6 +882,10 @@ class FCTM_OT_apply_theme(bpy.types.Operator):
         set_color_by_path(theme, "user_interface.editor_border", palette["user_interface.editor_border"])
         set_color_by_path(theme, "user_interface.editor_outline", palette["user_interface.editor_outline"])
 
+        # World > Surface > Background (hidden from the UI - see
+        # world_background delta in STRUCTURAL_VALUE_DELTAS)
+        apply_world_background_color(context, palette["world_background"])
+
         # --- SAFE DEEP ASSIGNMENT (VISITED-SET BACKED) ---
         apply_color_deep(
             theme,
@@ -811,6 +899,7 @@ class FCTM_OT_apply_theme(bpy.types.Operator):
             v3d_space = getattr(v3d, "space", None)
             if v3d_space is not None:
                 set_color(v3d_space, "back", prefs.viewport_bg_color)
+                set_color(v3d_space, "text_hi", prefs.viewport_text_highlight_color)
 
                 gradients = getattr(v3d_space, "gradients", None)
                 if gradients is not None:
@@ -824,6 +913,7 @@ class FCTM_OT_apply_theme(bpy.types.Operator):
             set_color(v3d, "grid_major", prefs.viewport_grid_major_color)
 
         prefs.status_color = STATUS_COLOR_APPLIED
+        prefs.is_pending = False
 
         if not prefs.has_saved_initial_preset:
             try:
@@ -866,6 +956,7 @@ MIN_BLENDER_VERSION = (5, 0, 0)
 def register():
     if bpy.app.version < MIN_BLENDER_VERSION:
         raise Exception("Requires Blender 5.0 or newer.")
+
     for cls in classes:
         bpy.utils.register_class(cls)
 
